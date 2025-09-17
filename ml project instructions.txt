@@ -1,0 +1,98 @@
+PROJECT INSTRUCTIONS (incl. PAT)
+Roles
+
+The entity providing prompts is Davide.
+
+The entity providing prose and code is the agent.
+
+Purpose
+
+This project organises the Processing and Analysis notebooks into clearly labelled, question-mapped steps and produces clean indices (tables/CSVs/LaTeX) on demand.
+
+Ground rules
+
+No silent changes to code. The agent does not rename variables or modify logic unless Davide asks.
+
+One label per cell. Exactly one bprint(...) at the very top of a cell.
+
+No extra files/snippets unless Davide asks.
+
+Verbatim questions. When mapping a cell, the agent quotes the assignment’s wording exactly from the uploaded “Assignment … (Questions).pdf”.
+
+If a question label is not present in the PDF, the agent marks the # supports: line as “awaiting verbatim text” (no guessing).
+
+PAT (Process/Analysis Answer Tagging)
+
+What PAT does (for every code cell):
+
+Understand the cell — the agent reads the code to determine what it actually does.
+
+Map to the assignment — the agent chooses the correct item (e.g., Q1(a), Q3(e), Q4(b)), ignoring any legacy titles.
+
+Stamp the tag line — the agent inserts a bprint(...) as the first line, using a global serial N that always increments.
+
+Add two comment lines immediately below:
+
+# supports: Qx(y) — "<verbatim question text>" (left blank after the colon if the wording cannot be found).
+
+# does: <1–2 plain-English sentences describing what the cell actually does>.
+
+Tag line formats
+
+Processing notebook:
+bprint("Process Answer: Q<question>(<part>)<N>")
+
+Analysis notebook:
+bprint("Analysis Answer: Q<question>(<part>)<N>")
+
+Diagnostics in Processing: same as Processing, with an optional inline comment:
+bprint("Process Answer: Q<question>(<part>)<N>") # DIAGNOSTIC
+
+Line-by-line template
+
+Line 1 (tag line): bprint("Process Answer: Q<q>(<part>)<N>") or bprint("Analysis Answer: Q<q>(<part>)<N>")
+
+N is a monotonic, global serial.
+
+An optional inline Python comment may follow (e.g., # DIAGNOSTIC).
+
+Line 2 (supports): # supports: Qx(y) — "<verbatim assignment text>"
+
+Line 3 (does): # does: <concise, accurate description in British English>
+
+Content-based mapping cheat sheet
+
+Use these cues to decide which question a cell supports:
+
+A recent copy of the .ipynb file is normally in the project files. The agent will ask Davide if a newer version appears to be required.
+
+Note: Inventory is not required for Q1; any inventory checks there are diagnostics only.
+
+The Assignment document is in the project files.
+
+Index/table generation (when Davide asks)
+
+The agent will:
+
+Review the provided Python code and correlate each cell’s purpose with the assignment question.
+
+Generate a cell table with:
+
+the first non-empty line (the tag line with bprint(...)),
+
+the “used to answer:” question is asking which assignment question 
+
+a brief PAT “does:” description.
+
+
+Do not create files or code snippets unless Davide asks.
+
+Commands at a glance
+
+“restart PAT” — the agent resumes tagging with the next global serial.
+
+“PAT:” + cell content — the agent replies with the label plus the supports/does lines (or the full cell if Davide explicitly asks).
+
+Renumbering — no backfilling; the global serial keeps increasing. Numeric order is not enforced.
+
+Minimal examples (for reference only)
