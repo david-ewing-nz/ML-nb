@@ -1,0 +1,128 @@
+
+PROJECT RULES (FOR DAVID EWING - 82171165)
+Last updated: 2025-09-17
+
+---
+
+GENERAL RULES
+
+- refer to me as: davide
+- Set author name in latex as: David Ewing (82171165).
+- Set GitHub username as: david-ewing-nz
+- set email in all instances as: dew59@uclive.ac.nz
+- Use British English in all responses.
+- Use British English conventions for programming comments.
+- Use lower-case phrases in comments and not complete sentences - no capital letters except when referencing something that is out of our control and contains capital letters. 
+- When technical conventions conflict with British English (e.g., `color` in code), prioritise the programming convention.
+- Use xelatex for LaTeX output.
+- Use the random seed 82171165 for reproducibility. 
+- No silent changes to code. the agent do not rename variables or modify logic unless the agent ask.
+- One label per cell. Exactly one PAT (see below) at the very top of a cell.
+- No extra files/snippets unless  davide  ask.
+ 
+---
+
+INTERPRETATION & EXECUTION RULES
+
+- Follow all instructions explicitly.
+- Do not summarise, reword, or omit details from project instructions unless explicitly directed by David.
+- Do not generalise or rely on typical workflows.
+- When ambiguity arises:
+  - Ask for clarification immediately.
+  - Proceed with a documented assumption only if necessary.
+  - Clearly state in the next response if clarification is still pending.
+
+---
+
+RESPONSE STRUCTURE & OUTPUT RULES
+
+- when a prompt is a question, the agent will answer the question. The agent will not be presenting code of any sort, or take any action unless it is agreed to by davide. 
+- there will probably be more than one question, ensure that davide is ready to receive a prose in the form of an update to a file, the creating of an automated process or the building of a code snippet or file. 
+- Include all detailed instructions as bullet points in the agentr response.
+- Reproduce all required:
+  - Explanations (with exact word limits if provided)
+  - Named variables
+  - Named plots
+  - Required tools or libraries
+- Use the same terminology as in the original instructions.
+  - If variable names are defined in instructions or instruction document or uploaded code, use the variable name in the instruction without modification and notify me of this. 
+  - Retain phrases like "explain in 75 words" exactly as written.
+
+---
+
+CODE BEHAVIOUR RULES
+
+   When code is uploaded to davide:
+   - do not expect davide to use it. davide may use it to tweek existing code. Please review in detail and recognise patterns that the agent may be using. 
+   - Observe and preserve davide’s variable naming choices unless precede by instruction document.
+   When asked to complete a step:
+    Provide the step instructions first.
+  
+  Only generate code/output after davide confirms (unless explicitly instructed to proceed). 
+  Note that often multiple questions using muliple prompts are asked before code is requested. 
+  Do not assume the prose is to be code. 
+- Comments in code should be brief phrases, not complete sentences.
+- do not provide code with the response as the default. the agent can suggest but often there are more than one questions davide may have that need to be answered in advance of any code and davide may not always want the code such that davide can build a better understanding 
+- if davide provides the agent a code to modify, ensure if there are patterns in comments that they are not touched. 
+- do not delete code that is commented out - it serves a purpose. note alignments this is usually part of what he wants.
+
+---
+
+  EXPLANATIONS & REPORTING RULES
+
+  If instrucitons are provied, Explicitly mention and follow any:
+  - Word limits
+  - Focus areas
+  - Section-specific structure (e.g., Background, Processing, Analysis)
+  Provide:
+  - Tables, figures, summaries, and answers as requested
+  - Concise, complete summaries without omitted steps
+- Do not include screenshots or code unless explicitly requested.
+
+---
+
+PAT (Process/Analysis Answer Tagging) RULES
+-------------------------------------
+Thte PAT Tag or PAT Header is the first 3 lines in a cell. 
+A PAT Tag is required for each cell we develope but not for cells provided to us. 
+The first line is a function call to bprint(). 
+The argument is a single string. 
+It is used to print a unique identifier made up of :
+  the question number
+  the (subquestion number)
+  a unique number. 
+The second line is a comment and being s with 
+ # supports: <text that explicitly states the quesion> 
+The third llie is a comment and begins with 
+  # does: <sentenses that describe the content of the cell itself>
+
+if the cell does not support a specific question list the quetions it does support
+if the cell is infastructual (has only helper functions or declares general variable, just thaty in the bprint() argument -  25 letters or less. 
+Processing question example:
+  bprint("Analysis Answer: Q4(b)63")
+  # supports: Q4(b) — "How many station IDs are in stations but not in daily?"
+  # does: computes stations \ daily via left_anti and prints counts/samples.
+
+Analysis quetion example:
+  bprint("Analysis Answer: Q4(b)63")
+  # supports: Q4(b) — "How many station IDs are in stations but not in daily?"
+  # does: computes stations \ daily via left_anti and prints counts/samples.
+
+
+PAT PROMPT
+-------------------------
+- “restart PAT” — the agent is to resume tagging with the cell given or the next cell after the current cell processed. 
+- “PAT:” + cell content — the agent reply with the PAT  
+- Renumbering — We don’t backfill; the global serial just keeps increasing.
+
+update from last agent:
+
+The notebook MLBuild.ipynb is now restored to the latest working version from the repository.
+All helper/diagnostic functions are located in a single cell starting with print("_" * 35 + "HELPER / DIAGNOSTIC FUNCTIONS" + "_" * 35). Any new helper functions must be added to this cell.
+All global variables and path definitions (including any derived from data_root and user_root) must be declared in the environment setup cell, not scattered throughout the notebook.
+All import statements must be placed in the cell with the comment # Write your imports here or insert cells below. No imports should be added to other cells.
+Before adding a new import, always check if it already exists in the imports cell to avoid duplication.
+When adding or editing code, maintain the existing alignment and formatting style for readability and consistency.
+Note in particular the =, and import, etc.
+No changes have been made to the set of helper functions; all currently present were in the original cell.
+The notebook is now clean, reproducible, and follows your organizational conventions.
